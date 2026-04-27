@@ -77,412 +77,80 @@ body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse
 .opp-card.active .portrait-svg,.opp-single.active .portrait-svg{border-color:var(--theme-accent);box-shadow:0 0 16px rgba(200,145,26,0.35)}
 .opp-single.eliminated .portrait-svg{filter:grayscale(0.8) brightness(0.5)}
 .state-angry .portrait-svg{animation:angryShake 0.28s ease-in-out infinite;box-shadow:0 0 20px rgba(200,40,20,0.6)!important}
-.state-nervous .portrait-svg{animation:nervousWobble 0.7s ease-in-out infinite}
-.state-triumphant .portrait-svg{animation:triumphBounce 0.45s ease-out;box-shadow:0 0 24px rgba(232,184,75,0.7)!important}
-@keyframes angryShake{0%,100%{transform:translateX(0) rotate(0)}30%{transform:translateX(-4px) rotate(-2deg)}70%{transform:translateX(4px) rotate(2deg)}}
-@keyframes nervousWobble{0%,100%{transform:scale(1) translateY(0)}50%{transform:scale(0.96) translateY(2px)}}
-@keyframes triumphBounce{0%{transform:scale(1)}40%{transform:scale(1.12)}70%{transform:scale(0.96)}100%{transform:scale(1)}}
-.opp-name{font-size:14px;color:var(--cream);text-align:center;font-family:'Pirata One',cursive;letter-spacing:1px}
-.opp-title{font-size:11px;color:var(--theme-accent);text-align:center;font-style:italic;transition:color 0.8s}
-.opp-pips{display:flex;gap:4px;justify-content:center;margin-top:2px}
-.die-pip{width:9px;height:9px;border-radius:50%;background:var(--gold);transition:background 0.2s,transform 0.2s}
-.die-pip.gone{background:var(--surface2);border:1px solid var(--border);transform:scale(0.8)}
-.thinking-dot{position:absolute;bottom:4px;right:4px;width:13px;height:13px;border-radius:50%;background:var(--theme-accent);animation:pulse 1s ease-in-out infinite;border:2px solid var(--bg)}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.35;transform:scale(0.6)}}
-.taunt-inline{position:absolute;bottom:-2px;left:50%;background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:8px 14px;font-size:13px;color:var(--cream);line-height:1.4;max-width:260px;width:max-content;box-shadow:0 4px 16px rgba(0,0,0,0.6);opacity:0;transform:translateX(-50%) translateY(6px) scale(0.95);transition:opacity 0.2s,transform 0.2s;pointer-events:none;z-index:20;text-align:center}
-.taunt-inline.show{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
-.taunt-inline.chadwick{border-color:rgba(200,145,26,0.5);background:#1E1506}
-.taunt-inline.shark{border-color:rgba(100,120,160,0.4);background:#0E1220}
-.taunt-inline.calculator{border-color:rgba(60,140,90,0.35);background:#0A160E}
-.table-strip{flex-shrink:0;padding:10px 20px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;background:radial-gradient(ellipse at 50% 0%,var(--theme-table-from) 0%,transparent 100%);transition:background 0.8s;position:relative}
-.bid-display{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:12px 28px;box-shadow:0 4px 20px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.04);min-width:160px;justify-content:center;transition:border-color 0.3s,box-shadow 0.3s}
-.bid-display.tense{border-color:var(--warning);box-shadow:0 0 20px rgba(192,96,16,0.3)}
-.bid-display.critical{border-color:var(--danger);box-shadow:0 0 28px rgba(176,40,24,0.5);animation:bidPulse 1.2s ease-in-out infinite}
-@keyframes bidPulse{0%,100%{box-shadow:0 0 24px rgba(176,40,24,0.4)}50%{box-shadow:0 0 44px rgba(176,40,24,0.8)}}
-.bid-qty{font-family:'Pirata One',cursive;font-size:58px;color:var(--cream);line-height:1}
-.bid-sep{font-size:24px;color:var(--muted)}
-.bid-face{font-size:48px;line-height:1}
-.bid-empty{font-style:italic;color:var(--muted);font-size:15px}
-.turn-indicator{font-size:13px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-style:italic}
-.turn-indicator.your-turn{color:var(--gold-l);animation:glow 2s ease-in-out infinite}
-@keyframes glow{0%,100%{text-shadow:none}50%{text-shadow:0 0 12px rgba(232,184,75,0.6)}}
-.player-section{padding:6px 18px 6px;flex-shrink:0}
-.section-label{font-size:11px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
-.dice-row{display:flex;gap:8px;flex-wrap:wrap}
-.die{width:50px;height:50px;background:var(--surface);border:1px solid var(--border2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 2px 8px rgba(0,0,0,0.4)}
-.die.ghost{background:transparent;border-color:var(--border);opacity:0.22}
-.die.rolling{animation:diceRoll 0.5s cubic-bezier(0.36,0.07,0.19,0.97) both}
-@keyframes diceRoll{0%{transform:rotate(-20deg) scale(0.7);opacity:0}40%{transform:rotate(12deg) scale(1.15)}70%{transform:rotate(-6deg) scale(0.95)}100%{transform:rotate(0) scale(1);opacity:1}}
-.controls{background:var(--surface);border-top:1px solid var(--border);padding:10px 16px 24px;display:flex;flex-direction:column;gap:9px;flex-shrink:0}
-.bid-builder{display:flex;flex-direction:column;gap:7px}
-.qty-row{display:flex;align-items:center;justify-content:center;gap:14px}
-.qty-btn{width:44px;height:44px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;font-family:'Pirata One',cursive;font-size:22px;color:var(--cream);cursor:pointer;display:flex;align-items:center;justify-content:center}
-.qty-btn:active{background:var(--border2)}
-.qty-val{font-family:'Pirata One',cursive;font-size:40px;color:var(--cream);min-width:52px;text-align:center}
-.face-row{display:flex;gap:7px;justify-content:center}
-.face-btn{width:46px;height:46px;background:var(--surface2);border:1px solid transparent;border-radius:8px;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color 0.15s,background 0.15s}
-.face-btn.selected{border-color:var(--theme-accent);background:var(--surface);box-shadow:0 0 8px rgba(200,145,26,0.2)}
-.face-btn:active{transform:scale(0.9)}
-.action-row{display:flex;gap:10px}
-.btn-bid{flex:1;background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:14px;font-family:'Pirata One',cursive;font-size:18px;letter-spacing:3px;color:var(--gold);cursor:pointer}
-.btn-bid:active{background:var(--border2)}
-.btn-bid:disabled{opacity:0.3;cursor:not-allowed}
-.btn-liar{flex:1.4;background:var(--danger);border:none;border-radius:10px;padding:14px;font-family:'Pirata One',cursive;font-size:26px;letter-spacing:4px;color:var(--cream);cursor:pointer;transition:background 0.15s,transform 0.1s;box-shadow:0 4px 16px rgba(176,40,24,0.4);position:relative;overflow:hidden}
-.btn-liar::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.1) 0%,transparent 60%);pointer-events:none}
-.btn-liar:active{transform:scale(0.96)}
-.btn-liar:disabled{opacity:0.22;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-liar.ready{animation:liarPulse 2s ease-in-out infinite}
-@keyframes liarPulse{0%,100%{box-shadow:0 4px 16px rgba(176,40,24,0.4)}50%{box-shadow:0 4px 32px rgba(176,40,24,0.8),0 0 0 3px rgba(176,40,24,0.2)}}
-.waiting-msg{text-align:center;font-style:italic;color:var(--muted);font-size:15px;padding:4px 0}
-#liarOverlay{position:fixed;inset:0;z-index:9000;display:none;align-items:center;justify-content:center;pointer-events:none}
-#liarOverlay.active{display:flex}
-.liar-flash{position:absolute;inset:0;background:var(--danger);opacity:0}
-.liar-flash.go{animation:flashSeq 0.55s ease-out forwards}
-@keyframes flashSeq{0%{opacity:0}15%{opacity:0.85}40%{opacity:0.55}60%{opacity:0.8}100%{opacity:0}}
-.liar-word{position:relative;z-index:1;font-family:'Pirata One',cursive;font-size:96px;color:#fff;letter-spacing:8px;opacity:0;transform:scale(0.3) rotate(-12deg);text-shadow:0 0 40px rgba(255,100,80,1),0 0 80px rgba(255,50,30,0.8)}
-.liar-word.go{animation:wordSlam 0.5s cubic-bezier(0.18,1.4,0.4,1) forwards}
-@keyframes wordSlam{0%{opacity:0;transform:scale(0.3) rotate(-12deg)}60%{opacity:1;transform:scale(1.18) rotate(3deg)}80%{transform:scale(0.95) rotate(-1deg)}100%{opacity:1;transform:scale(1) rotate(0deg)}}
-.liar-shockwave{position:absolute;width:100px;height:100px;border-radius:50%;border:4px solid rgba(255,100,80,0.9);opacity:0}
-.liar-shockwave.go{animation:shockwave 0.7s ease-out forwards}
-@keyframes shockwave{0%{opacity:0.9;transform:scale(0.5)}100%{opacity:0;transform:scale(8)}}
-@keyframes screenShake{0%,100%{transform:translate(0,0)}10%{transform:translate(-8px,4px)}20%{transform:translate(8px,-6px)}30%{transform:translate(-6px,8px)}40%{transform:translate(10px,-4px)}50%{transform:translate(-8px,6px)}60%{transform:translate(6px,8px)}70%{transform:translate(-4px,-8px)}80%{transform:translate(8px,4px)}90%{transform:translate(-6px,-4px)}}
-#app.shaking{animation:screenShake 0.5s ease-out}
-#reveal{overflow-y:auto}
-.reveal-inner{padding:20px;display:flex;flex-direction:column;gap:16px;padding-bottom:40px}
-.outcome-banner{border-radius:12px;padding:18px;gap:6px;display:flex;flex-direction:column;animation:slideDown 0.4s ease-out}
-@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
-.outcome-banner.bidder-won{background:rgba(176,40,24,0.15);border:1px solid rgba(176,40,24,0.4)}
-.outcome-banner.challenger-won{background:rgba(42,122,64,0.15);border:1px solid rgba(42,122,64,0.4)}
-.outcome-title{font-family:'Pirata One',cursive;font-size:26px;letter-spacing:2px;color:var(--cream)}
-.outcome-sub{font-size:14px;color:var(--muted);line-height:1.5}
-.reveal-section-label{font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase}
-.player-reveal-row{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:12px;animation:fadeIn 0.3s ease-out both}
-.player-reveal-row.loser{border-color:rgba(176,40,24,0.5)}
-@keyframes fadeIn{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
-.reveal-name{font-size:13px;color:var(--cream);min-width:72px}
-.reveal-dice{display:flex;gap:6px;flex-wrap:wrap}
-.reveal-die{font-size:24px;opacity:0;transform:rotateY(90deg);transition:opacity 0.25s,transform 0.3s}
-.reveal-die.shown{opacity:0.4;transform:rotateY(0)}
-.reveal-die.match{opacity:1;filter:drop-shadow(0 0 5px var(--gold));transform:rotateY(0) scale(1.15)}
-.count-card{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:16px;text-align:center;gap:4px;display:flex;flex-direction:column;align-items:center}
-.count-label{font-size:9px;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
-.count-val{font-family:'Pirata One',cursive;font-size:44px;color:var(--cream)}
-.count-bid{font-size:13px;color:var(--muted);font-style:italic}
-.btn-continue{background:var(--gold);border:none;border-radius:10px;padding:15px;font-family:'Pirata One',cursive;font-size:18px;letter-spacing:3px;color:var(--bg);cursor:pointer;width:100%;transition:opacity 0.3s}
-.btn-continue:active{background:var(--gold-l)}
-#boon{padding:32px 20px 48px;gap:20px;align-items:center;background:radial-gradient(ellipse at 50% 30%,#1A2A10 0%,var(--bg) 70%)}
-.boon-title{font-family:'Pirata One',cursive;font-size:34px;color:var(--cream);letter-spacing:2px;text-align:center}
-.boon-sub{font-style:italic;color:var(--muted);font-size:14px;text-align:center}
-.boon-cards{width:100%;display:flex;flex-direction:column;gap:12px}
-.boon-card{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:18px;cursor:pointer;transition:border-color 0.15s,transform 0.1s;display:flex;flex-direction:column;gap:6px}
-.boon-card:active{transform:scale(0.98)}
-.boon-name{font-family:'Pirata One',cursive;font-size:22px;color:var(--gold);letter-spacing:1px}
-.boon-desc{font-size:14px;color:var(--muted);line-height:1.5}
-#runover{align-items:center;justify-content:center;gap:20px;padding:28px 24px;overflow-y:auto}
-#runover-inner{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%}
-.runover-skull{font-size:64px;animation:floatUp 3s ease-in-out infinite}
-@keyframes floatUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.runover-title{font-family:'Pirata One',cursive;font-size:40px;color:var(--cream);letter-spacing:2px;text-align:center}
-.runover-sub{font-style:italic;color:var(--muted);font-size:14px;text-align:center;line-height:1.6}
-.score-display{display:flex;flex-direction:column;align-items:center;gap:2px}
-.score-label{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase}
-.score-val{font-family:'Pirata One',cursive;font-size:52px;color:var(--cream)}
-.ante-record{width:100%;display:flex;flex-direction:column;gap:6px}
-.ante-record-row{display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:8px;padding:10px 14px;border:1px solid var(--border)}
-.share-card{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px}
-.share-card-title{font-family:'Pirata One',cursive;font-size:13px;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
-.share-card-run{font-family:'Pirata One',cursive;font-size:22px;color:var(--cream)}
-.share-card-detail{font-size:12px;color:var(--muted);font-style:italic;line-height:1.5}
-.share-card-moment{background:var(--surface);border-radius:8px;padding:10px 12px;border-left:3px solid var(--danger);margin-top:2px}
-.share-card-moment-text{font-size:13px;color:var(--cream);line-height:1.5}
-.share-card-score{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--border);padding-top:8px;margin-top:4px}
-.share-card-score-label{font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
-.share-card-score-val{font-family:'Pirata One',cursive;font-size:28px;color:var(--gold)}
-.share-card-url{font-size:9px;color:var(--muted);letter-spacing:1px;text-align:right}
-.btn-share{background:transparent;border:1px solid var(--border2);border-radius:8px;padding:10px 16px;font-family:'Pirata One',cursive;font-size:14px;letter-spacing:2px;color:var(--gold);cursor:pointer;width:100%}
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 18px;font-size:13px;color:var(--cream);z-index:10000;transition:transform 0.3s ease;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.6);max-width:300px;text-align:center}
-.toast.show{transform:translateX(-50%) translateY(0)}
-</style>
-</head>
-<body>
-<div id="app" class="ante-1">
-<div id="setup" class="screen active">
-<div><div class="title-eyebrow">☠ &nbsp;Liar's Dice&nbsp; ☠</div><div class="title-main">THE TAVERN</div><div class="title-sub">Five dice. Five antes. No mercy.</div></div>
-<div class="setup-field"><label class="setup-label" for="nameInput">Your name, Captain</label><input id="nameInput" class="setup-input" placeholder="Enter your name…" maxlength="16" autocomplete="off"></div>
-<div class="setup-field"><div class="toggle-row"><div><div class="toggle-title">Wild 1s</div><div class="toggle-desc">Ones count as any face</div></div><label class="toggle-switch"><input type="checkbox" id="wildsToggle"><span class="toggle-track"></span></label></div></div>
-<div class="setup-field"><label class="setup-label">The Voyage</label><div class="ante-row" id="setupAnteRow"></div></div>
-<button class="btn-primary" id="btnStart" disabled>SET SAIL</button>
-</div>
-<div id="board" class="screen">
-<div class="run-bar"><div class="run-ante"><span class="run-ante-label">Ante</span><span class="run-ante-val" id="anteDisplay">1/5</span></div><span class="run-theme-name" id="themeName"></span><span class="modifier-tag" id="modifierTag" style="display:none"></span><div class="run-pips" id="runPips"></div></div>
-<div class="opponent-stage" id="opponentStage"></div>
-<div class="table-strip"><div class="bid-display" id="bidDisplay"><span class="bid-empty">No bid yet</span></div><div class="turn-indicator" id="turnIndicator">Waiting…</div></div>
-<div class="player-section"><div class="section-label">Your Dice</div><div class="dice-row" id="playerDice"></div></div>
-<div class="controls">
-<div class="bid-builder" id="bidBuilder"><div class="qty-row"><button class="qty-btn" id="btnQtyDown">−</button><div class="qty-val" id="qtyDisplay">1</div><button class="qty-btn" id="btnQtyUp">+</button></div><div class="face-row" id="faceRow"></div></div>
-<div class="action-row"><button class="btn-bid" id="btnBid">BID</button><button class="btn-liar" id="btnLiar" disabled>LIAR!</button></div>
-<div class="waiting-msg" id="waitingMsg" style="display:none"></div>
-</div>
-</div>
-<div id="reveal" class="screen"><div class="reveal-inner" id="revealInner"></div></div>
-<div id="boon" class="screen"><div class="boon-title">Spoils of Victory</div><div class="boon-sub" id="boonSub"></div><div class="boon-cards" id="boonCards"></div></div>
-<div id="runover" class="screen"><div id="runover-inner"><div class="runover-skull" id="runoverSkull">💀</div><div class="runover-title" id="runoverTitle">Run Ended</div><div class="runover-sub" id="runoverSub"></div><div class="score-display"><div class="score-label">Final Score</div><div class="score-val" id="finalScore">0</div></div><div id="shareCardSlot"></div><div class="ante-record" id="anteRecord"></div><button class="btn-primary" onclick="restartRun()" style="width:100%;margin-top:4px">SAIL AGAIN</button></div></div>
-</div>
-<div id="liarOverlay"><div class="liar-flash" id="liarFlash"></div><div class="liar-shockwave" id="liarShockwave"></div><div class="liar-word" id="liarWord">LIAR!</div></div>
-<div class="toast" id="toast"></div>
-<script>
-function getSVG(charKey,state){const p=SVG_PORTRAITS[charKey]||SVG_PORTRAITS.generic;return p[state]||p.neutral||'';}
-const SVG_PORTRAITS={
-chadwick:{
-neutral:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="40" fill="#2A1A0A"/><rect x="30" y="60" width="20" height="18" rx="4" fill="#C8845A"/><path d="M15 80 Q20 62 30 60 L40 65 L50 60 Q60 62 65 80Z" fill="#8B1A1A"/><ellipse cx="20" cy="66" rx="10" ry="5" fill="#C8911A"/><rect x="14" y="64" width="12" height="3" rx="1" fill="#E8B84B"/><ellipse cx="60" cy="66" rx="10" ry="5" fill="#C8911A"/><rect x="54" y="64" width="12" height="3" rx="1" fill="#E8B84B"/><ellipse cx="40" cy="38" rx="22" ry="24" fill="#C8845A"/><ellipse cx="40" cy="55" rx="14" ry="5" fill="#B8724A" opacity="0.4"/><path d="M18 28 Q19 18 40 16 Q61 18 62 28 Q55 22 40 21 Q25 22 18 28Z" fill="#CC2020"/><path d="M18 28 Q19 22 40 21 Q61 22 62 28 L61 31 Q55 25 40 24 Q25 25 19 31Z" fill="#AA1010"/><path d="M18 28 Q40 23 62 28" stroke="#E8B84B" stroke-width="1.5" fill="none"/><ellipse cx="63" cy="27" rx="6" ry="4" fill="#CC2020" transform="rotate(15,63,27)"/><ellipse cx="67" cy="24" rx="4" ry="3" fill="#AA1010" transform="rotate(20,67,24)"/><path d="M18 30 Q14 35 16 42" stroke="#3A2010" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="18" cy="40" rx="5" ry="7" fill="#C8845A"/><ellipse cx="18" cy="40" rx="3" ry="5" fill="#B8724A"/><ellipse cx="62" cy="40" rx="5" ry="7" fill="#C8845A"/><ellipse cx="62" cy="40" rx="3" ry="5" fill="#B8724A"/><circle cx="64" cy="43" r="4" stroke="#E8B84B" stroke-width="2" fill="none"/><path d="M26 30 Q32 27 36 29" stroke="#3A2010" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M44 29 Q48 27 54 30" stroke="#3A2010" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="31" cy="36" rx="6" ry="5" fill="white"/><ellipse cx="49" cy="36" rx="6" ry="5" fill="white"/><ellipse cx="32" cy="37" rx="4" ry="4" fill="#5A3A20"/><ellipse cx="50" cy="37" rx="4" ry="4" fill="#5A3A20"/><ellipse cx="33" cy="36" rx="2" ry="2" fill="#1A0A00"/><ellipse cx="51" cy="36" rx="2" ry="2" fill="#1A0A00"/><circle cx="34" cy="35" r="1" fill="white"/><circle cx="52" cy="35" r="1" fill="white"/><path d="M38 42 Q37 46 36 48 Q40 50 44 48 Q43 46 42 42" fill="#B8724A"/><ellipse cx="36" cy="48" rx="3" ry="2" fill="#A86A40"/><ellipse cx="44" cy="48" rx="3" ry="2" fill="#A86A40"/><path d="M30 54 Q34 52 40 53 Q46 52 50 54" stroke="#8B4A30" stroke-width="1.5" fill="none"/><path d="M33 54 Q40 58 47 54" fill="#CC6644"/><path d="M33 54 Q40 57 47 54 Q46 56 40 57 Q34 56 33 54Z" fill="white"/><path d="M33 51 Q37 53 40 52 Q43 53 47 51" stroke="#3A2010" stroke-width="1.5" fill="none"/><ellipse cx="40" cy="57" rx="2.5" ry="2" fill="#3A2010"/></svg>`,
-bluffing:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="40" fill="#2A1A0A"/><rect x="30" y="60" width="20" height="18" rx="4" fill="#C8845A"/><path d="M15 80 Q20 62 30 60 L40 65 L50 60 Q60 62 65 80Z" fill="#8B1A1A"/><ellipse cx="20" cy="66" rx="10" ry="5" fill="#C8911A"/><ellipse cx="60" cy="66" rx="10" ry="5" fill="#C8911A"/><ellipse cx="40" cy="38" rx="22" ry="24" fill="#D89060"/><path d="M18 28 Q19 18 40 16 Q61 18 62 28 Q55 22 40 21 Q25 22 18 28Z" fill="#CC2020"/><path d="M18 28 Q40 23 62 28" stroke="#E8B84B" stroke-width="1.5" fill="none"/><ellipse cx="63" cy="27" rx="6" ry="4" fill="#CC2020" transform="rotate(15,63,27)"/><ellipse cx="18" cy="40" rx="5" ry="7" fill="#C8845A"/><ellipse cx="62" cy="40" rx="5" ry="7" fill="#C8845A"/><circle cx="64" cy="43" r="4" stroke="#E8B84B" stroke-width="2" fill="none"/><path d="M25 27 Q32 24 36 27" stroke="#3A2010" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M44 27 Q48 24 54 27" stroke="#3A2010" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="31" cy="37" rx="7" ry="6" fill="white"/><ellipse cx="49" cy="37" rx="7" ry="6" fill="white"/><ellipse cx="31" cy="38" rx="4" ry="4" fill="#5A3A20"/><ellipse cx="49" cy="38" rx="4" ry="4" fill="#5A3A20"/><ellipse cx="32" cy="37" rx="2" ry="2" fill="#1A0A00"/><ellipse cx="50" cy="37" rx="2" ry="2" fill="#1A0A00"/><circle cx="33" cy="36" r="1" fill="white"/><circle cx="51" cy="36" r="1" fill="white"/><path d="M22 32 Q21 28 23 25" stroke="#88CCFF" stroke-width="1.5" fill="none" stroke-linecap="round"/><ellipse cx="23" cy="25" rx="2" ry="3" fill="#88CCFF" opacity="0.8"/><path d="M58 29 Q60 25 59 22" stroke="#88CCFF" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M38 42 Q37 46 36 48 Q40 50 44 48 Q43 46 42 42" fill="#B8724A"/><ellipse cx="36" cy="48" rx="3" ry="2" fill="#A86A40"/><ellipse cx="44" cy="48" rx="3" ry="2" fill="#A86A40"/><path d="M30 54 Q40 60 50 54" fill="#CC6644"/><path d="M30 54 Q40 59 50 54 Q48 57 40 58 Q32 57 30 54Z" fill="white"/><path d="M33 51 Q37 53 40 52 Q43 53 47 51" stroke="#3A2010" stroke-width="1.5" fill="none"/><ellipse cx="24" cy="46" rx="5" ry="3" fill="#E08060" opacity="0.4"/><ellipse cx="56" cy="46" rx="5" ry="3" fill="#E08060" opacity="0.4"/></svg>`,
-angry:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="40" fill="#2A1A0A"/><rect x="30" y="60" width="20" height="18" rx="4" fill="#CC6040"/><path d="M15 80 Q20 62 30 60 L40 65 L50 60 Q60 62 65 80Z" fill="#8B1A1A"/><ellipse cx="20" cy="66" rx="10" ry="5" fill="#C8911A"/><ellipse cx="60" cy="66" rx="10" ry="5" fill="#C8911A"/><ellipse cx="40" cy="38" rx="22" ry="24" fill="#CC5530"/><path d="M18 28 Q19 18 40 16 Q61 18 62 28 Q55 22 40 21 Q25 22 18 28Z" fill="#CC2020"/><path d="M18 28 Q40 23 62 28" stroke="#E8B84B" stroke-width="1.5" fill="none"/><ellipse cx="63" cy="27" rx="6" ry="4" fill="#CC2020" transform="rotate(15,63,27)"/><path d="M18 30 Q14 35 16 42" stroke="#3A2010" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="18" cy="40" rx="5" ry="7" fill="#CC5530"/><ellipse cx="62" cy="40" rx="5" ry="7" fill="#CC5530"/><circle cx="64" cy="43" r="4" stroke="#E8B84B" stroke-width="2" fill="none"/><path d="M25 32 Q30 27 36 30" stroke="#2A1000" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M44 30 Q50 27 55 32" stroke="#2A1000" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="31" cy="37" rx="6" ry="4" fill="white"/><ellipse cx="49" cy="37" rx="6" ry="4" fill="white"/><ellipse cx="31" cy="38" rx="4" ry="3" fill="#5A1A00"/><ellipse cx="49" cy="38" rx="4" ry="3" fill="#5A1A00"/><ellipse cx="32" cy="37" rx="2" ry="1.5" fill="#1A0A00"/><ellipse cx="50" cy="37" rx="2" ry="1.5" fill="#1A0A00"/><path d="M34 22 Q36 20 35 18 Q37 17 36 15" stroke="#AA2020" stroke-width="1.5" fill="none"/><path d="M37 42 Q36 46 35 48 Q40 51 45 48 Q44 46 43 42" fill="#AA3318"/><ellipse cx="35" cy="48" rx="3.5" ry="2.5" fill="#8B2810"/><ellipse cx="45" cy="48" rx="3.5" ry="2.5" fill="#8B2810"/><path d="M28 54 Q34 50 40 51 Q46 50 52 54 Q50 62 40 63 Q30 62 28 54Z" fill="#5A1A00"/><path d="M29 54 Q40 52 51 54 Q50 57 40 58 Q30 57 29 54Z" fill="white"/><path d="M16 25 Q14 20 16 15" stroke="#FF6040" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/><path d="M64 25 Q66 20 64 15" stroke="#FF6040" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/></svg>`,
-defeated:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="40" fill="#1A1208"/><rect x="30" y="60" width="20" height="18" rx="4" fill="#A06840"/><path d="M15 80 Q20 62 30 60 L40 65 L50 60 Q60 62 65 80Z" fill="#6B1010"/><ellipse cx="20" cy="66" rx="10" ry="5" fill="#886010"/><ellipse cx="60" cy="66" rx="10" ry="5" fill="#886010"/><ellipse cx="42" cy="40" rx="22" ry="24" fill="#B87040" transform="rotate(8,42,40)"/><path d="M18 28 Q19 18 40 16 Q61 18 62 28 Q55 22 40 21 Q25 22 18 28Z" fill="#CC2020"/><path d="M18 28 Q40 23 62 28" stroke="#E8B84B" stroke-width="1.5" fill="none"/><ellipse cx="63" cy="30" rx="6" ry="4" fill="#CC2020" transform="rotate(25,63,30)"/><ellipse cx="18" cy="40" rx="5" ry="7" fill="#B87040"/><ellipse cx="62" cy="40" rx="5" ry="7" fill="#B87040"/><circle cx="64" cy="43" r="4" stroke="#886010" stroke-width="2" fill="none"/><path d="M26 32 Q31 35 36 33" stroke="#3A2010" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M44 33 Q49 35 54 32" stroke="#3A2010" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="31" cy="38" rx="6" ry="4" fill="white"/><ellipse cx="50" cy="38" rx="6" ry="4" fill="white"/><ellipse cx="31" cy="39" rx="4" ry="3" fill="#5A3A20"/><ellipse cx="50" cy="39" rx="4" ry="3" fill="#5A3A20"/><ellipse cx="31" cy="39" rx="2" ry="1.5" fill="#1A0A00"/><ellipse cx="50" cy="39" rx="2" ry="1.5" fill="#1A0A00"/><path d="M25 36 Q31 33 37 36" fill="#B87040"/><path d="M44 36 Q50 33 56 36" fill="#B87040"/><path d="M37 42 Q36 48 35 50" stroke="#88CCFF" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse cx="35" cy="51" rx="2" ry="3" fill="#88CCFF" opacity="0.9"/><path d="M38 43 Q37 47 36 49 Q40 51 44 49 Q43 47 42 43" fill="#A06840"/><path d="M30 56 Q40 52 50 56" stroke="#7A4030" stroke-width="2" fill="none"/><path d="M32 56 Q40 59 48 56 Q46 58 40 59 Q34 58 32 56Z" fill="#CC6644" opacity="0.7"/><ellipse cx="40" cy="58" rx="2.5" ry="2" fill="#3A2010"/></svg>`,
-triumphant:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="40" fill="#2A1A0A"/><rect x="28" y="58" width="24" height="20" rx="4" fill="#C8845A"/><path d="M10 80 Q18 60 30 58 L40 64 L50 58 Q62 60 70 80Z" fill="#8B1A1A"/><ellipse cx="16" cy="64" rx="12" ry="6" fill="#C8911A"/><rect x="10" y="62" width="14" height="3" rx="1" fill="#E8B84B"/><ellipse cx="64" cy="64" rx="12" ry="6" fill="#C8911A"/><rect x="58" y="62" width="14" height="3" rx="1" fill="#E8B84B"/><ellipse cx="40" cy="37" rx="22" ry="24" fill="#C8845A"/><path d="M18 28 Q19 18 40 16 Q61 18 62 28 Q55 22 40 21 Q25 22 18 28Z" fill="#CC2020"/><path d="M18 28 Q40 23 62 28" stroke="#E8B84B" stroke-width="1.5" fill="none"/><ellipse cx="63" cy="27" rx="6" ry="4" fill="#CC2020" transform="rotate(15,63,27)"/><path d="M18 30 Q14 35 16 42" stroke="#3A2010" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="18" cy="40" rx="5" ry="7" fill="#C8845A"/><ellipse cx="62" cy="40" rx="5" ry="7" fill="#C8845A"/><circle cx="64" cy="43" r="4" stroke="#E8B84B" stroke-width="2" fill="none"/><path d="M25 28 Q31 25 36 28" stroke="#3A2010" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M44 28 Q49 25 55 28" stroke="#3A2010" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="31" cy="36" rx="7" ry="6" fill="white"/><ellipse cx="49" cy="36" rx="7" ry="6" fill="white"/><ellipse cx="32" cy="37" rx="4.5" ry="4.5" fill="#5A3A20"/><ellipse cx="50" cy="37" rx="4.5" ry="4.5" fill="#5A3A20"/><ellipse cx="33" cy="36" rx="2.5" ry="2.5" fill="#1A0A00"/><ellipse cx="51" cy="36" rx="2.5" ry="2.5" fill="#1A0A00"/><circle cx="34" cy="34" r="1.5" fill="white"/><circle cx="52" cy="34" r="1.5" fill="white"/><path d="M20 28 L21 25 L22 28 L25 29 L22 30 L21 33 L20 30 L17 29Z" fill="#E8B84B" opacity="0.8"/><path d="M58 26 L59 24 L60 26 L62 27 L60 28 L59 30 L58 28 L56 27Z" fill="#E8B84B" opacity="0.8"/><path d="M38 42 Q37 46 36 48 Q40 50 44 48 Q43 46 42 42" fill="#B8724A"/><ellipse cx="36" cy="48" rx="3" ry="2" fill="#A86A40"/><ellipse cx="44" cy="48" rx="3" ry="2" fill="#A86A40"/><path d="M26 53 Q33 50 40 51 Q47 50 54 53 Q52 62 40 63 Q28 62 26 53Z" fill="#CC6644"/><path d="M27 53 Q40 51 53 53 Q52 57 40 58 Q28 57 27 53Z" fill="white"/><line x1="33" y1="53" x2="33" y2="57" stroke="#DDD" stroke-width="1"/><line x1="37" y1="52" x2="37" y2="57" stroke="#DDD" stroke-width="1"/><line x1="40" y1="51" x2="40" y2="57" stroke="#DDD" stroke-width="1"/><line x1="43" y1="52" x2="43" y2="57" stroke="#DDD" stroke-width="1"/><line x1="47" y1="53" x2="47" y2="57" stroke="#DDD" stroke-width="1"/><ellipse cx="23" cy="46" rx="6" ry="3" fill="#E08060" opacity="0.4"/><ellipse cx="57" cy="46" rx="6" ry="3" fill="#E08060" opacity="0.4"/></svg>`,
-nervous:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="40" fill="#2A1A0A"/><rect x="30" y="60" width="20" height="18" rx="4" fill="#C8845A"/><path d="M15 80 Q20 62 30 60 L40 65 L50 60 Q60 62 65 80Z" fill="#8B1A1A"/><ellipse cx="20" cy="66" rx="10" ry="5" fill="#C8911A"/><ellipse cx="60" cy="66" rx="10" ry="5" fill="#C8911A"/><ellipse cx="40" cy="38" rx="22" ry="24" fill="#C8845A"/><path d="M18 28 Q19 18 40 16 Q61 18 62 28 Q55 22 40 21 Q25 22 18 28Z" fill="#CC2020"/><path d="M18 28 Q40 23 62 28" stroke="#E8B84B" stroke-width="1.5" fill="none"/><ellipse cx="63" cy="27" rx="6" ry="4" fill="#CC2020" transform="rotate(15,63,27)"/><ellipse cx="18" cy="40" rx="5" ry="7" fill="#C8845A"/><ellipse cx="62" cy="40" rx="5" ry="7" fill="#C8845A"/><circle cx="64" cy="43" r="4" stroke="#E8B84B" stroke-width="2" fill="none"/><path d="M25 29 Q31 32 36 30" stroke="#3A2010" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M44 30 Q49 32 54 29" stroke="#3A2010" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="31" cy="37" rx="6" ry="5" fill="white"/><ellipse cx="49" cy="37" rx="6" ry="5" fill="white"/><ellipse cx="31" cy="38" rx="3.5" ry="3.5" fill="#5A3A20"/><ellipse cx="49" cy="38" rx="3.5" ry="3.5" fill="#5A3A20"/><ellipse cx="31" cy="38" rx="2" ry="2" fill="#1A0A00"/><ellipse cx="49" cy="38" rx="2" ry="2" fill="#1A0A00"/><path d="M38 42 Q37 46 36 48 Q40 50 44 48 Q43 46 42 42" fill="#B8724A"/><ellipse cx="36" cy="48" rx="3" ry="2" fill="#A86A40"/><ellipse cx="44" cy="48" rx="3" ry="2" fill="#A86A40"/><path d="M32 54 Q36 56 40 55 Q44 56 48 54" stroke="#8B4A30" stroke-width="1.5" fill="none"/><path d="M33 54 Q36 57 40 56 Q44 57 47 54 Q46 56 40 57 Q34 56 33 54Z" fill="#CC6644"/><ellipse cx="24" cy="47" rx="5" ry="3" fill="#E08060" opacity="0.5"/><ellipse cx="56" cy="47" rx="5" ry="3" fill="#E08060" opacity="0.5"/><path d="M18 50 Q17 47 19 44" stroke="#88CCFF" stroke-width="1.5" fill="none" stroke-linecap="round"/><ellipse cx="19" cy="44" rx="1.5" ry="2" fill="#88CCFF" opacity="0.7"/></svg>`
-},
-generic:{neutral:`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="40" fill="#1A1108"/><text x="40" y="54" text-anchor="middle" font-size="40">🏴‍☠️</text></svg>`}
-};
-['bosun','ironjaw','oneeye','quartermaster','human'].forEach(k=>{
-const em={bosun:'🧐',ironjaw:'😐',oneeye:'🏴‍☠️',quartermaster:'💀',human:'🧑‍✈️'};
-const bg={bosun:'#081A10',ironjaw:'#101420',oneeye:'#101420',quartermaster:'#140808',human:'#1A1108'};
-const se={bosun:{neutral:'🧐',bluffing:'😶',angry:'😑',defeated:'🤓',triumphant:'😏',nervous:'😬'},ironjaw:{neutral:'😐',bluffing:'😐',angry:'😐',defeated:'😑',triumphant:'🙂',nervous:'😐'},oneeye:{neutral:'🏴‍☠️',bluffing:'🏴‍☠️',angry:'😤',defeated:'😶',triumphant:'😈',nervous:'😰'},quartermaster:{neutral:'💀',bluffing:'🦴',angry:'☠️',defeated:'😶‍🌫️',triumphant:'👑',nervous:'💀'},human:{neutral:'🧑‍✈️',bluffing:'🧑‍✈️',angry:'😤',defeated:'😔',triumphant:'😄',nervous:'😬'}};
-SVG_PORTRAITS[k]={};
-['neutral','bluffing','angry','defeated','triumphant','nervous'].forEach(s=>{
-const e=se[k]?.[s]||em[k];
-SVG_PORTRAITS[k][s]=`<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="40" fill="${bg[k]}"/><text x="40" y="54" text-anchor="middle" font-size="40">${e}</text></svg>`;
-});});
-const ANTE_THEMES={1:{name:'The Dockside Tavern',cls:'ante-1',opponents:'1v1'},2:{name:"The Ship's Mess",cls:'ante-2',opponents:'1v2'},3:{name:"The Captain's Quarters",cls:'ante-3',opponents:'1v2'},4:{name:"The Crow's Nest",cls:'ante-4',opponents:'1v3'},5:{name:"Dead Man's Table",cls:'ante-5',opponents:'1v3'}};
-const CHARS={
-chadwick:{name:'Capt. Chadwick',title:'The NPC',personality:'hothead',taunts:{open:["Sigma move incoming. Observe. 😎","No cap this is literally my arc","Galaxy brain play. You won't understand.","Today is MY day. I can feel it fr fr","Watch and learn bestie. Watch. And. Learn."],bluffHigh:["This is what 200 IQ looks like bestie","The grindset doesn't make sense to the NPC mindset","Bold? No. Correct? Also no. But VIBES? Yes."],loseChallenge:["Cringe lucky. That's literally all that was. 💀","I was TESTING you btw","The dice are broken I'm not even mad","This is fine. I'm fine. The table is fine. 🔥","My villain arc starts NOW"],winChallenge:["COOKED. BOILED. SERVED. 🍳","W. W. Absolute W. Biggest W of my CAREER.","SIGMA VISION ACTIVATED. I CALLED IT.","Tell me I'm not the main character RN 😭"],playerLowDice:["Oh you're cooked cooked bestie 💀","Down bad. Tremendously down bad.","The audacity to still be at this table rn"],eliminated:["The prophecy said I would win eventually. 📜","This never happened btw","Not my final form. NOT. MY. FINAL. FORM.","I was literally about to win too 😭"]}},
-bosun:{name:'The Bosun',title:'The Calculator',personality:'calculator',taunts:{open:["I have calculated the optimal opening bid.","Statistically, the first bid sets the table.","The numbers, as always, will prevail."],bluffHigh:["The numbers are giving... incorrect.","Probability: zero. Rizz: also zero.","Statistically speaking, that was not it chief."],loseChallenge:["I have recalculated and chosen to be unbothered.","An anomaly. The model will be updated.","Variance. Simply variance."],winChallenge:["As predicted. The model holds.","Mathematics is never wrong. Only your bids are."],playerLowDice:["Your dice count suggests imminent elimination.","The math is not looking favourable for you."],eliminated:["A calculated loss. I chose this.","The model required recalibration."]}},
-ironjaw:{name:'Ironjaw',title:'The Shark',personality:'shark',taunts:{open:[".","Whenever you're ready.","Take your time.","I'm patient."],bluffHigh:["Interesting.","Bold.","Noted.","cute bid"],loseChallenge:["Fortunate.","Lucky.","Once.","."],winChallenge:["I knew.","Always.","Did you think that would work?","slay I guess. no."],playerLowDice:["Not long now.","One more.","."],eliminated:[".","Next time.","This changes nothing."]}},
-oneeye:{name:'One-Eye',title:'The Shark',personality:'shark',taunts:{open:["The sea gives. The sea takes.","Another lamb to the table.","I've broken better captains than you."],bluffHigh:["Desperate.","I've seen that move before."],loseChallenge:["The tide turns.","Every shark bleeds eventually.","Enjoy it."],winChallenge:["The sea always collects.","I've seen every bluff. Every one."],playerLowDice:["The end approaches.","Almost merciful, really."],eliminated:["The sea claims another.","Come back when you've learned."]}},
-quartermaster:{name:'The Quartermaster',title:'The Final Boss',personality:'shark',taunts:{open:["the delusion is giving main character","I have presided over this table for thirty years.","Another fresh face. How charming.","You've made it this far. I almost respect that."],bluffHigh:["cute","The audacity is noted. The competence is not.","not the pipeline I expected for you"],loseChallenge:["You ate and left no crumbs. Unfortunately.","I will remember this."],winChallenge:["Did you rehearse that lie?","thirty years at this table. I know every tell.","You thought that was going to work. Slay."],playerLowDice:["Should I wait while you compose yourself?","The sea is patient. So am I.","One die left. How poetic."],eliminated:["The table endures. You do not.","Dead Man's Table claims another. As it always does."]}}
-};
-const OPPONENTS_BY_ANTE=[['chadwick'],['chadwick','bosun'],['bosun','ironjaw'],['ironjaw','oneeye'],['ironjaw','oneeye','quartermaster']];
-const MODIFIERS={3:{label:'Rising Tide',desc:'Bids must raise quantity only.'},5:{label:"Dead Man's Gambit",desc:'Lose a challenge — eliminated immediately.'}};
-const BOON_POOL=[{type:'extra_die',name:'Found Cargo',desc:'Start your next match with one extra die.'},{type:'peek_once',name:"Crow's Nest",desc:'Once per match, peek at one hidden opponent die.'},{type:'insurance',name:'Dead Reckoning',desc:'Your next wrong challenge costs no dice.'},{type:'reroll',name:'Loaded Dice',desc:'Once per match, reroll all your dice.'}];
-const SETUP_ANTE_DATA=[{num:1,label:'Dockside',opp:'1v1'},{num:2,label:"Ship's Mess",opp:'1v2'},{num:3,label:"Captain's",opp:'1v2'},{num:4,label:"Crow's Nest",opp:'1v3'},{num:5,label:"Dead Man's",opp:'1v3'}];
-const sar=document.getElementById('setupAnteRow');
-SETUP_ANTE_DATA.forEach(a=>{const d=document.createElement('div');d.className='ante-pip';d.innerHTML=`<div class="ante-num">${a.num}</div><div class="ante-label">${a.label}</div><div class="ante-opp">${a.opp}</div>`;sar.appendChild(d);});
-const FACES=['⚀','⚁','⚂','⚃','⚄','⚅'];
-function rollDie(){return Math.floor(Math.random()*6)+1}
-function rollDice(n){return Array.from({length:n},rollDie)}
-function countMatching(all,face,wilds){let c=0;all.forEach(d=>{if(d===face)c++;else if(wilds&&d===1&&face!==1)c++;});return c}
-function isBidValid(cur,next){if(!cur)return true;if(next.qty>cur.qty)return true;if(next.qty===cur.qty&&next.face>cur.face)return true;return false}
-const PROFILES={hothead:{bluffRate:0.45,ct:0.55,bj:2,qrt:0.4},calculator:{bluffRate:0.08,ct:0.30,bj:1,qrt:0.6},shark:{bluffRate:0.22,ct:0.28,bj:1,qrt:0.55}};
-function bPMF(n,p,k){if(k<0||k>n)return 0;let c=1;for(let i=0;i<k;i++)c=c*(n-i)/(i+1);return c*Math.pow(p,k)*Math.pow(1-p,n-k)}
-function bAtLeast(n,p,k){if(k<=0)return 1;if(k>n)return 0;let s=0;for(let i=0;i<k;i++)s+=bPMF(n,p,i);return 1-s}
-function probValid(qty,face,km,unk,wilds){const need=Math.max(0,qty-km);if(need===0)return 1;const p=wilds&&face!==1?2/6:1/6;return bAtLeast(unk,p,need)}
-function bestFace(dice,wilds){const c={1:0,2:0,3:0,4:0,5:0,6:0};dice.forEach(d=>{c[d]++;if(wilds&&d===1)for(let f=2;f<=6;f++)c[f]++;});let b=1,bc=0;for(let f=6;f>=1;f--)if(c[f]>bc){bc=c[f];b=f;}return b}
-function mih(dice,face,wilds){let c=0;dice.forEach(d=>{if(d===face)c++;else if(wilds&&d===1&&face!==1)c++;});return c}
-function getAIAction(dice,curBid,others,cnt,pers,wilds){
-const prof=PROFILES[pers];const unk=others.reduce((s,p)=>s+p.diceCount,0)-cnt;
-if(!curBid){const b=bestFace(dice,wilds);const k=mih(dice,b,wilds);const q=Math.random()<prof.bluffRate?k+1:Math.max(1,k);return{type:'bid',bid:{qty:q,face:b}};}
-const km=mih(dice,curBid.face,wilds);const pr=probValid(curBid.qty,curBid.face,km,unk,wilds);
-if(pr<prof.ct)return{type:'challenge'};
-if(Math.random()<prof.bluffRate){const j=Math.ceil(Math.random()*prof.bj);const nf=Math.min(6,curBid.face+j);if(nf>curBid.face)return{type:'bid',bid:{qty:curBid.qty,face:nf}};return{type:'bid',bid:{qty:curBid.qty+1,face:curBid.face}};}
-const pq=probValid(curBid.qty+1,curBid.face,km,unk,wilds);if(pq>=prof.qrt)return{type:'bid',bid:{qty:curBid.qty+1,face:curBid.face}};
-if(curBid.face<6){const nf=curBid.face+1;const km2=mih(dice,nf,wilds);const pf=probValid(curBid.qty,nf,km2,unk,wilds);if(pf>=prof.ct)return{type:'bid',bid:{qty:curBid.qty,face:nf}};}
-if(curBid.face<6)return{type:'bid',bid:{qty:curBid.qty,face:curBid.face+1}};
-return{type:'bid',bid:{qty:curBid.qty+1,face:1}};
+< truncated lines 80-769 >
 }
-let tauntHideT=null;
-function getRandTaunt(k,type){const t=CHARS[k]?.taunts[type];if(!t)return null;return t[Math.floor(Math.random()*t.length)];}
-function showTauntOn(k,type,el){
-if(!el)return;const text=getRandTaunt(k,type);if(!text)return;
-let bubble=el.querySelector('.taunt-inline');
-if(!bubble){bubble=document.createElement('div');bubble.className=`taunt-inline ${k}`;el.style.position='relative';el.appendChild(bubble);}
-bubble.className=`taunt-inline ${k}`;bubble.textContent=text;
-clearTimeout(tauntHideT);
-setTimeout(()=>bubble.classList.add('show'),10);
-tauntHideT=setTimeout(()=>bubble.classList.remove('show'),3400);
-}
-function hideAllTaunts(){document.querySelectorAll('.taunt-inline').forEach(b=>b.classList.remove('show'));}
-let G={};
-function initRun(humanName,wilds){G={humanName,wilds,currentAnte:1,maxAntes:5,anteHistory:[],collectedBoons:[],activeModifier:null,extraDice:0,hasInsurance:false,players:[],currentBid:null,lastBidderId:null,currentPlayerIdx:0,phase:'rolling',pendingReveal:null,roundCount:0,totalRounds:0,lastAction:{}};startMatch();}
-function applyAnteTheme(ante){document.getElementById('app').className=ANTE_THEMES[ante]?.cls||'ante-1';}
-function startMatch(){
-G.activeModifier=MODIFIERS[G.currentAnte]||null;
-const hd=5+G.extraDice;
-const oppKeys=OPPONENTS_BY_ANTE[Math.min(G.currentAnte-1,4)];
-G.players=[{id:'human',charKey:'human',name:G.humanName,title:'Captain',isHuman:true,diceCount:hd,dice:[],isEliminated:false,personality:null,lastBid:null},...oppKeys.map((k,i)=>({id:`ai_${i}`,charKey:k,name:CHARS[k].name,title:CHARS[k].title,isHuman:false,diceCount:5,dice:[],isEliminated:false,personality:CHARS[k].personality,lastBid:null}))];
-G.hasInsurance=G.collectedBoons.some(b=>b.type==='insurance');
-G.roundCount=0;G.lastAction={};applyAnteTheme(G.currentAnte);startRound();
-}
-function startRound(){G.currentBid=null;G.lastBidderId=null;G.roundCount++;G.players.forEach(p=>{if(!p.isEliminated)p.dice=rollDice(p.diceCount);});const active=G.players.filter(p=>!p.isEliminated);const first=active[Math.floor(Math.random()*active.length)];G.currentPlayerIdx=G.players.indexOf(first);G.phase='bidding';renderBoard();maybeAI();}
-function nextPlayer(){const n=G.players.length;let idx=(G.currentPlayerIdx+1)%n;for(let i=0;i<n;i++){if(!G.players[idx].isEliminated)return idx;idx=(idx+1)%n;}return G.currentPlayerIdx;}
-function checkWin(){const a=G.players.filter(p=>!p.isEliminated);if(a.length===1)return a[0];return null;}
-function humanBid(){
-const qty=parseInt(document.getElementById('qtyDisplay').textContent);
-const sel=document.querySelector('.face-btn.selected');if(!sel)return;
-const face=parseInt(sel.dataset.face);const bid={qty,face};
-if(G.activeModifier?.label==='Rising Tide'&&G.currentBid&&bid.qty<=G.currentBid.qty){showToast('Rising Tide: must raise quantity!');return;}
-if(!isBidValid(G.currentBid,bid)){showToast('Invalid bid — must raise quantity or face.');return;}
-const human=G.players.find(p=>p.isHuman);human.lastBid=bid;
-G.currentBid=bid;G.lastBidderId=human.id;G.currentPlayerIdx=nextPlayer();renderBoard();maybeAI();
-}
-function humanChallenge(){if(!G.currentBid){showToast("No bid to challenge yet!");return;}hideAllTaunts();playLiarCinematic(()=>resolveChallenge(G.players.find(p=>p.isHuman).id,G.lastBidderId));}
-function resolveChallenge(challengerId,bidderId){
-const allDice=G.players.filter(p=>!p.isEliminated).flatMap(p=>p.dice);
-const actual=countMatching(allDice,G.currentBid.face,G.wilds);
-const bidWasValid=actual>=G.currentBid.qty;const loserId=bidWasValid?challengerId:bidderId;
-const bidderPlayer=G.players.find(p=>p.id===bidderId);
-if(bidderPlayer&&!bidderPlayer.isHuman)G.lastAction[bidderPlayer.charKey]=loserId===bidderPlayer.id?'loseChallenge':'winChallenge';
-if(G.activeModifier?.label==="Dead Man's Gambit"){const loser=G.players.find(p=>p.id===loserId);if(loser){loser.diceCount=0;loser.isEliminated=true;}}
-else{const human=G.players.find(p=>p.isHuman);if(loserId===human.id&&G.hasInsurance){G.hasInsurance=false;showToast("Dead Reckoning — no dice lost!");}else{const loser=G.players.find(p=>p.id===loserId);if(loser){loser.diceCount=Math.max(0,loser.diceCount-1);if(loser.diceCount===0)loser.isEliminated=true;}}}
-G.pendingReveal={challengerId,bidderId,bid:{...G.currentBid},allDice:Object.fromEntries(G.players.filter(p=>!p.isEliminated||p.id===loserId).map(p=>[p.id,[...p.dice]])),actual,loserId,bidWasValid};
-const winner=checkWin();if(winner){G.pendingReveal.matchOver=true;G.pendingReveal.humanWon=winner.isHuman;}
-G.phase='reveal';G.totalRounds+=G.roundCount;renderReveal();
-}
-function maybeAI(){const cur=G.players[G.currentPlayerIdx];if(!cur||cur.isHuman||cur.isEliminated)return;setTimeout(()=>doAITurn(cur),900+Math.random()*500);}
-function doAITurn(player){
-if(G.phase!=='bidding')return;
-const others=G.players.filter(p=>!p.isEliminated&&p.id!==player.id).map(p=>({diceCount:p.diceCount}));
-const action=getAIAction(player.dice,G.currentBid,others,player.diceCount,player.personality,G.wilds);
-const cardEl=document.querySelector(`[data-char="${player.charKey}"]`);
-if(action.type==='challenge'){
-if(!G.currentBid){G.currentBid={qty:1,face:3};G.lastBidderId=player.id;G.currentPlayerIdx=nextPlayer();renderBoard();maybeAI();return;}
-G.lastAction[player.charKey]='winChallenge';
-showTauntOn(player.charKey,'winChallenge',cardEl);
-setTimeout(()=>playLiarCinematic(()=>resolveChallenge(player.id,G.lastBidderId)),400);return;
-}
-player.lastBid=action.bid;G.currentBid=action.bid;G.lastBidderId=player.id;G.currentPlayerIdx=nextPlayer();
-const total=G.players.filter(p=>!p.isEliminated).reduce((s,p)=>s+p.diceCount,0);
-if(action.bid.qty/total>0.55)showTauntOn(player.charKey,'bluffHigh',cardEl);
-else if(Math.random()<0.25)showTauntOn(player.charKey,'open',cardEl);
-renderBoard();maybeAI();
-}
-function playLiarCinematic(cb){
-const ov=document.getElementById('liarOverlay');const flash=document.getElementById('liarFlash');const word=document.getElementById('liarWord');const sw=document.getElementById('liarShockwave');const app=document.getElementById('app');
-ov.style.pointerEvents='all';ov.classList.add('active');app.classList.add('shaking');setTimeout(()=>app.classList.remove('shaking'),500);
-flash.classList.remove('go');void flash.offsetWidth;flash.classList.add('go');
-word.style.opacity='0';word.classList.remove('go');setTimeout(()=>word.classList.add('go'),80);
-[0,160,320].forEach((delay,i)=>{setTimeout(()=>{const el=i===0?sw:sw.cloneNode(true);if(i>0)ov.appendChild(el);el.classList.remove('go');void el.offsetWidth;el.classList.add('go');setTimeout(()=>{if(i>0)el.remove();},800);},delay);});
-setTimeout(()=>{word.classList.remove('go');flash.classList.remove('go');ov.classList.remove('active');ov.style.pointerEvents='none';ov.querySelectorAll('.liar-shockwave:not(#liarShockwave)').forEach(e=>e.remove());if(cb)cb();},950);
-}
-function continueAfterReveal(){const rev=G.pendingReveal;if(rev.matchOver){if(rev.humanWon){G.anteHistory.push({ante:G.currentAnte,won:true,rounds:G.roundCount});if(G.currentAnte>=G.maxAntes)endRun(true);else{G.currentAnte++;offerBoons();}}else{G.anteHistory.push({ante:G.currentAnte,won:false,rounds:G.roundCount});endRun(false);}}else startRound();}
-function offerBoons(){G.phase='boon';const offered=shuffleArr([...BOON_POOL]).slice(0,3);renderBoon(offered);showScreen('boon');}
-function pickBoon(boon){if(boon.type==='extra_die')G.extraDice++;else G.collectedBoons.push(boon);showToast(`✓ ${boon.name}`);setTimeout(()=>{startMatch();showScreen('board');},400);}
-function endRun(won){G.phase='runover';const score=G.anteHistory.filter(a=>a.won).length*100+G.collectedBoons.length*25+(won?500:0);renderRunOver(won,score);showScreen('runover');}
-function restartRun(){applyAnteTheme(1);showScreen('setup');}
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
-function renderBoard(){
-const human=G.players.find(p=>p.isHuman);
-const cur=G.players[G.currentPlayerIdx];
-const isMyTurn=cur?.isHuman;
-const theme=ANTE_THEMES[G.currentAnte];
-document.getElementById('anteDisplay').textContent=`${G.currentAnte}/5`;
-document.getElementById('themeName').textContent=theme.name;
-const pips=document.getElementById('runPips');pips.innerHTML='';
-for(let i=1;i<=5;i++){const d=document.createElement('div');d.className='run-pip'+(i<G.currentAnte?' done':i===G.currentAnte?' active':'');pips.appendChild(d);}
-const mt=document.getElementById('modifierTag');
-if(G.activeModifier){mt.style.display='';mt.textContent='⚡ '+G.activeModifier.label;}else mt.style.display='none';
-const stage=document.getElementById('opponentStage');stage.innerHTML='';
-const opponents=G.players.filter(p=>!p.isHuman);
-if(opponents.length===1){
-const p=opponents[0];
-const isActive=cur?.id===p.id;
-const isThinking=isActive&&!isMyTurn&&G.phase==='bidding';
-const state=getState(p);
-const div=document.createElement('div');
-div.className=`opp-single${isActive?' active':''} state-${state}${p.isEliminated?' eliminated':''}`;
-div.dataset.char=p.charKey;
-const pipsHtml=Array.from({length:5},(_,i)=>`<div class="die-pip${i<p.diceCount?'':' gone'}"></div>`).join('');
-div.innerHTML=`<div class="portrait-svg" style="width:120px;height:120px">${getSVG(p.charKey,state)}</div><div class="opp-name">${p.name}</div><div class="opp-title">${CHARS[p.charKey]?.title||''}</div><div class="opp-pips">${pipsHtml}</div>${isThinking?'<div class="thinking-dot"></div>':''}`;
-stage.appendChild(div);
-}else{
-const wrap=document.createElement('div');
-wrap.className=`opp-multi${opponents.length>=3?' opp-three':''}`;
-opponents.forEach(p=>{
-const isActive=cur?.id===p.id;
-const isThinking=isActive&&!isMyTurn&&G.phase==='bidding';
-const state=getState(p);
-const sz=opponents.length>=3?72:88;
-const card=document.createElement('div');
-card.className=`opp-card${isActive?' active':''} state-${state}${p.isEliminated?' eliminated':''}`;
-card.dataset.char=p.charKey;
-const pipsHtml=Array.from({length:5},(_,i)=>`<div class="die-pip${i<p.diceCount?'':' gone'}"></div>`).join('');
-card.innerHTML=`<div class="portrait-svg" style="width:${sz}px;height:${sz}px">${getSVG(p.charKey,state)}</div><div class="opp-name" style="font-size:${opponents.length>=3?'11':'13'}px">${p.name}</div><div class="opp-title">${CHARS[p.charKey]?.title||''}</div><div class="opp-pips">${pipsHtml}</div>${isThinking?'<div class="thinking-dot"></div>':''}`;
-wrap.appendChild(card);
-});
-stage.appendChild(wrap);
-}
-const bd=document.getElementById('bidDisplay');bd.className='bid-display';
-if(G.currentBid){
-const total=G.players.filter(p=>!p.isEliminated).reduce((s,p)=>s+p.diceCount,0);
-const ratio=G.currentBid.qty/total;
-if(ratio>0.6)bd.classList.add('critical');else if(ratio>0.4)bd.classList.add('tense');
-bd.innerHTML=`<span class="bid-qty">${G.currentBid.qty}</span><span class="bid-sep">×</span><span class="bid-face">${FACES[G.currentBid.face-1]}</span>`;
-}else bd.innerHTML=`<span class="bid-empty">No bid yet — open the round</span>`;
-const ti=document.getElementById('turnIndicator');
-if(isMyTurn){ti.textContent='Your turn';ti.className='turn-indicator your-turn';}
-else{ti.textContent=`${cur?.name||'Opponent'} is thinking…`;ti.className='turn-indicator';}
-const dr=document.getElementById('playerDice');dr.innerHTML='';
-for(let i=0;i<5;i++){const d=document.createElement('div');if(i<human.diceCount){d.className='die';d.textContent=FACES[human.dice[i]-1]||'⚀';d.style.animationDelay=`${i*0.07}s`;d.classList.add('rolling');setTimeout(()=>d.classList.remove('rolling'),600+i*70);}else{d.className='die ghost';d.textContent='·';}dr.appendChild(d);}
-const bb=document.getElementById('bidBuilder');const bm=document.getElementById('waitingMsg');
-const btnBid=document.getElementById('btnBid');const btnLiar=document.getElementById('btnLiar');
-if(isMyTurn){bb.style.display='';bm.style.display='none';btnBid.disabled=false;btnLiar.disabled=!G.currentBid;if(G.currentBid)btnLiar.classList.add('ready');else btnLiar.classList.remove('ready');if(!document.querySelector('.face-btn.selected'))initBidBuilder();}
-else{bb.style.display='none';bm.style.display='';bm.textContent=`${cur?.name||'Opponent'} is thinking…`;btnBid.disabled=true;btnLiar.disabled=true;btnLiar.classList.remove('ready');}
-showScreen('board');
-}
-function getState(p){
-if(p.isEliminated)return'defeated';
-const la=G.lastAction[p.charKey];
-if(la==='winChallenge')return'triumphant';
-if(la==='loseChallenge')return'angry';
-if(p.diceCount<=1)return'nervous';
-if(p.diceCount<=2&&p.personality==='hothead')return'angry';
-if(p.personality==='shark')return'neutral';
-return'neutral';
-}
+
 function initBidBuilder(){
-const startQty=G.currentBid?G.currentBid.qty+1:1;
-document.getElementById('qtyDisplay').textContent=startQty;
-const fr=document.getElementById('faceRow');fr.innerHTML='';
-const startFace=G.currentBid?G.currentBid.face:3;
-FACES.forEach((f,i)=>{const btn=document.createElement('button');btn.className='face-btn'+(i+1===startFace?' selected':'');btn.textContent=f;btn.dataset.face=i+1;btn.onclick=()=>{document.querySelectorAll('.face-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');};fr.appendChild(btn);});
+  const startQty=G.currentBid?G.currentBid.qty+1:1;
+  document.getElementById('qtyDisplay').textContent=startQty;
+  const fr=document.getElementById('faceRow');fr.innerHTML='';
+  const startFace=G.currentBid?G.currentBid.face:3;
+  FACES.forEach((f,i)=>{const btn=document.createElement('button');btn.className='face-btn'+(i+1===startFace?' selected':'');btn.textContent=f;btn.dataset.face=i+1;btn.onclick=()=>{SFX.tap();document.querySelectorAll('.face-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');};fr.appendChild(btn);});
 }
+
 function renderReveal(){
-const rev=G.pendingReveal;const ps=G.players;
-const challenger=ps.find(p=>p.id===rev.challengerId);const bidder=ps.find(p=>p.id===rev.bidderId);const loser=ps.find(p=>p.id===rev.loserId);
-if(loser&&!loser.isHuman&&loser.isEliminated)setTimeout(()=>{const el=document.querySelector(`[data-char="${loser.charKey}"]`);showTauntOn(loser.charKey,'eliminated',el);},1200);
-let html=`<div class="outcome-banner ${rev.bidWasValid?'bidder-won':'challenger-won'}"><div class="outcome-title">${rev.bidWasValid?'BID WAS GOOD':'LIAR EXPOSED'}</div><div class="outcome-sub">${challenger?.name} called liar on ${bidder?.name}.<br>${rev.bidWasValid?`The bid held — ${loser?.name} loses a die.`:`The bluff failed — ${loser?.name} loses a die.`}</div></div><div class="reveal-section-label">Dice on the Table</div>`;
-Object.entries(rev.allDice).forEach(([pid,dice],idx)=>{const p=ps.find(pl=>pl.id===pid);if(!p)return;const diceHtml=dice.map(d=>`<span class="reveal-die" data-face="${d}">${FACES[d-1]}</span>`).join('');html+=`<div class="player-reveal-row${pid===rev.loserId?' loser':''}" data-delay="${idx*120}"><div class="reveal-name">${pid===rev.loserId?'💀 ':''}${p.isHuman?'You':p.name}</div><div class="reveal-dice" data-pid="${pid}">${diceHtml}</div></div>`;});
-html+=`<div class="count-card"><div class="count-label">Actual Count</div><div class="count-val">${rev.actual} × ${FACES[rev.bid.face-1]}</div><div class="count-bid">Bid was: ${rev.bid.qty} × ${FACES[rev.bid.face-1]}</div></div>`;
-if(rev.matchOver)html+=`<div style="text-align:center;font-family:'Pirata One',cursive;font-size:24px;color:var(--cream);letter-spacing:2px;padding:6px 0">${rev.humanWon?`⚓ ${ANTE_THEMES[G.currentAnte].name} cleared!`:'💀 The plank awaits.'}</div>`;
-const btnLabel=rev.matchOver?(rev.humanWon?'CLAIM BOON →':'SEE THE DAMAGE →'):'NEXT ROUND →';
-html+=`<button class="btn-continue" id="btnContinue" style="opacity:0;pointer-events:none">${btnLabel}</button>`;
-document.getElementById('revealInner').innerHTML=html;showScreen('reveal');
-let totalDelay=0;document.querySelectorAll('[data-pid]').forEach((container,i)=>{const delay=i*200;const spans=container.querySelectorAll('.reveal-die');totalDelay=delay+spans.length*90+300;setTimeout(()=>{spans.forEach((span,j)=>{setTimeout(()=>{span.classList.add('shown');if(parseInt(span.dataset.face)===rev.bid.face)setTimeout(()=>span.classList.add('match'),120);},j*90);});},delay);});
-setTimeout(()=>{const btn=document.getElementById('btnContinue');if(btn){btn.style.opacity='1';btn.style.pointerEvents='auto';btn.onclick=continueAfterReveal;}},totalDelay+200);
+  const rev=G.pendingReveal;const ps=G.players;
+  const challenger=ps.find(p=>p.id===rev.challengerId);const bidder=ps.find(p=>p.id===rev.bidderId);const loser=ps.find(p=>p.id===rev.loserId);
+  if(loser&&!loser.isHuman&&loser.isEliminated)setTimeout(()=>{const el=document.querySelector(`[data-char="${loser.charKey}"]`);showTauntOn(loser.charKey,'eliminated',el);},1200);
+  let html=`<div class="outcome-banner ${rev.bidWasValid?'bidder-won':'challenger-won'}"><div class="outcome-title">${rev.bidWasValid?'BID WAS GOOD':'LIAR EXPOSED'}</div><div class="outcome-sub">${challenger?.name} called liar on ${bidder?.name}.<br>${rev.bidWasValid?`The bid held — ${loser?.name} loses a die.`:`The bluff failed — ${loser?.name} loses a die.`}</div></div><div class="reveal-section-label">Dice on the Table</div>`;
+  Object.entries(rev.allDice).forEach(([pid,dice],idx)=>{const p=ps.find(pl=>pl.id===pid);if(!p)return;const diceHtml=dice.map(d=>`<span class="reveal-die" data-face="${d}">${FACES[d-1]}</span>`).join('');html+=`<div class="player-reveal-row${pid===rev.loserId?' loser':''}" data-delay="${idx*120}"><div class="reveal-name">${pid===rev.loserId?'💀 ':''}${p.isHuman?'You':p.name}</div><div class="reveal-dice" data-pid="${pid}">${diceHtml}</div></div>`;});
+  html+=`<div class="count-card"><div class="count-label">Actual Count</div><div class="count-val">${rev.actual} × ${FACES[rev.bid.face-1]}</div><div class="count-bid">Bid was: ${rev.bid.qty} × ${FACES[rev.bid.face-1]}</div></div>`;
+  if(rev.matchOver)html+=`<div style="text-align:center;font-family:'Pirata One',cursive;font-size:24px;color:var(--cream);letter-spacing:2px;padding:6px 0">${rev.humanWon?`⚓ ${ANTE_THEMES[G.currentAnte].name} cleared!`:'💀 The plank awaits.'}</div>`;
+  const btnLabel=rev.matchOver?(rev.humanWon?'CLAIM BOON →':'SEE THE DAMAGE →'):'NEXT ROUND →';
+  html+=`<button class="btn-continue" id="btnContinue" style="opacity:0;pointer-events:none">${btnLabel}</button>`;
+  document.getElementById('revealInner').innerHTML=html;showScreen('reveal');
+  let totalDelay=0;
+  document.querySelectorAll('[data-pid]').forEach((container,i)=>{
+    const delay=i*200;const spans=container.querySelectorAll('.reveal-die');totalDelay=delay+spans.length*90+300;
+    setTimeout(()=>{
+      spans.forEach((span,j)=>{
+        setTimeout(()=>{
+          span.classList.add('shown');
+          const isMatch=parseInt(span.dataset.face)===rev.bid.face;
+          SFX.dieReveal(isMatch);
+          if(isMatch)setTimeout(()=>span.classList.add('match'),120);
+        },j*90);
+      });
+    },delay);
+  });
+  setTimeout(()=>{const btn=document.getElementById('btnContinue');if(btn){btn.style.opacity='1';btn.style.pointerEvents='auto';btn.onclick=continueAfterReveal;}},totalDelay+200);
 }
+
 function renderBoon(offered){document.getElementById('boonSub').textContent=`${ANTE_THEMES[G.currentAnte-1]?.name||'Ante'} cleared. Choose your reward.`;const cards=document.getElementById('boonCards');cards.innerHTML='';offered.forEach(b=>{const div=document.createElement('div');div.className='boon-card';div.innerHTML=`<div class="boon-name">${b.name}</div><div class="boon-desc">${b.desc}</div>`;div.onclick=()=>pickBoon(b);cards.appendChild(div);});}
+
 function renderRunOver(won,score){
-document.getElementById('runoverSkull').textContent=won?'⚓':'💀';
-document.getElementById('runoverTitle').textContent=won?'VICTORY!':'RUN ENDED';
-const antesCleared=G.anteHistory.filter(a=>a.won).length;
-const lastAnte=G.anteHistory[G.anteHistory.length-1];
-document.getElementById('runoverSub').textContent=won?`All five antes cleared, Captain ${G.humanName}.`:`${ANTE_THEMES[lastAnte?.ante||1]?.name} was your final table.`;
-document.getElementById('finalScore').textContent=score;
-const rev=G.pendingReveal;const loser=rev?G.players.find(p=>p.id===rev.loserId):null;const bidder=rev?G.players.find(p=>p.id===rev.bidderId):null;const challenger=rev?G.players.find(p=>p.id===rev.challengerId):null;
-let momentText='';
-if(rev){const calledBy=challenger?.isHuman?'You':challenger?.name;const calledOn=bidder?.isHuman?'you':bidder?.name;const result=rev.bidWasValid?`Bid held (${rev.actual} actual). ${loser?.isHuman?'You lost':'They lost'} a die.`:`Bluff exposed (only ${rev.actual}). ${loser?.isHuman?'You walked the plank.':'They walked the plank.'}`;momentText=`${calledBy} called liar on ${calledOn} (${rev.bid.qty}×${FACES[rev.bid.face-1]}). ${result}`;}
-document.getElementById('shareCardSlot').innerHTML=`<div class="share-card"><div class="share-card-title">☠ Liar's Dice — Run Report ☠</div><div class="share-card-run">${won?'Victory Run':'Run Ended'} — ${antesCleared}/5 Antes</div><div class="share-card-detail">Captain ${G.humanName} · ${G.totalRounds} rounds · ${G.collectedBoons.length} boons${G.activeModifier?`<br>⚡ ${G.activeModifier.label}`:''}</div>${momentText?`<div class="share-card-moment"><div class="share-card-moment-text">${momentText}</div></div>`:''}<div class="share-card-score"><div class="share-card-score-label">Final Score</div><div class="share-card-score-val">${score}</div></div><div class="share-card-url">liars-dice.app</div></div><button class="btn-share" onclick="shareRun(${score},'${won?'Victory':'Defeated'}',${antesCleared})">SHARE THIS RUN →</button>`;
-const rec=document.getElementById('anteRecord');rec.innerHTML='<div style="font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:6px">Voyage Log</div>';
-G.anteHistory.forEach(a=>{const row=document.createElement('div');row.className='ante-record-row';row.innerHTML=`<div style="font-family:'Pirata One',cursive;font-size:16px;color:var(--muted);min-width:20px">${a.ante}</div><div style="font-size:16px">${a.won?'✅':'💀'}</div><div style="flex:1;font-size:12px;color:var(--muted)">${ANTE_THEMES[a.ante]?.name||''}</div><div style="font-size:11px;color:var(--muted)">${a.rounds} rounds</div>`;rec.appendChild(row);});
+  document.getElementById('runoverSkull').textContent=won?'⚓':'💀';
+  document.getElementById('runoverTitle').textContent=won?'VICTORY!':'RUN ENDED';
+  const antesCleared=G.anteHistory.filter(a=>a.won).length;
+  const lastAnte=G.anteHistory[G.anteHistory.length-1];
+  document.getElementById('runoverSub').textContent=won?`All five antes cleared, Captain ${G.humanName}.`:`${ANTE_THEMES[lastAnte?.ante||1]?.name} was your final table.`;
+  document.getElementById('finalScore').textContent=score;
+  const rev=G.pendingReveal;const loser=rev?G.players.find(p=>p.id===rev.loserId):null;const bidder=rev?G.players.find(p=>p.id===rev.bidderId):null;const challenger=rev?G.players.find(p=>p.id===rev.challengerId):null;
+  let momentText='';
+  if(rev){const calledBy=challenger?.isHuman?'You':challenger?.name;const calledOn=bidder?.isHuman?'you':bidder?.name;const result=rev.bidWasValid?`Bid held (${rev.actual} actual). ${loser?.isHuman?'You lost':'They lost'} a die.`:`Bluff exposed (only ${rev.actual}). ${loser?.isHuman?'You walked the plank.':'They walked the plank.'}`;momentText=`${calledBy} called liar on ${calledOn} (${rev.bid.qty}×${FACES[rev.bid.face-1]}). ${result}`;}
+  document.getElementById('shareCardSlot').innerHTML=`<div class="share-card"><div class="share-card-title">☠ Liar's Dice — Run Report ☠</div><div class="share-card-run">${won?'Victory Run':'Run Ended'} — ${antesCleared}/5 Antes</div><div class="share-card-detail">Captain ${G.humanName} · ${G.totalRounds} rounds · ${G.collectedBoons.length} boons${G.activeModifier?`<br>⚡ ${G.activeModifier.label}`:''}</div>${momentText?`<div class="share-card-moment"><div class="share-card-moment-text">${momentText}</div></div>`:''}<div class="share-card-score"><div class="share-card-score-label">Final Score</div><div class="share-card-score-val">${score}</div></div><div class="share-card-url">liars-dice.app</div></div><button class="btn-share" onclick="shareRun(${score},'${won?'Victory':'Defeated'}',${antesCleared})">SHARE THIS RUN →</button>`;
+  const rec=document.getElementById('anteRecord');rec.innerHTML='<div style="font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:6px">Voyage Log</div>';
+  G.anteHistory.forEach(a=>{const row=document.createElement('div');row.className='ante-record-row';row.innerHTML=`<div style="font-family:'Pirata One',cursive;font-size:16px;color:var(--muted);min-width:20px">${a.ante}</div><div style="font-size:16px">${a.won?'✅':'💀'}</div><div style="flex:1;font-size:12px;color:var(--muted)">${ANTE_THEMES[a.ante]?.name||''}</div><div style="font-size:11px;color:var(--muted)">${a.rounds} rounds</div>`;rec.appendChild(row);});
 }
+
 function shareRun(score,result,antes){const text=`☠️ Liar's Dice — ${result}!\n${G.humanName} cleared ${antes}/5 antes — Score: ${score}\nPlay at liars-dice.app`;if(navigator.share)navigator.share({title:"Liar's Dice",text}).catch(()=>copyToClipboard(text));else{copyToClipboard(text);showToast('Run copied to clipboard! 📋');}}
 function copyToClipboard(text){if(navigator.clipboard)navigator.clipboard.writeText(text).catch(()=>{});else{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);}}
+
 let toastT;
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2400);}
 function shuffleArr(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
+
+// ═══ INIT ═══
 const nameInput=document.getElementById('nameInput');const btnStart=document.getElementById('btnStart');
 nameInput.addEventListener('input',()=>{btnStart.disabled=nameInput.value.trim().length===0;});
-btnStart.addEventListener('click',()=>{const name=nameInput.value.trim()||'Captain';const wilds=document.getElementById('wildsToggle').checked;G.wilds=wilds;initRun(name,wilds);showScreen('board');});
-document.getElementById('btnQtyDown').addEventListener('click',()=>{const el=document.getElementById('qtyDisplay');const v=parseInt(el.textContent);if(v>1)el.textContent=v-1;});
-document.getElementById('btnQtyUp').addEventListener('click',()=>{const el=document.getElementById('qtyDisplay');el.textContent=parseInt(el.textContent)+1;});
+btnStart.addEventListener('click',()=>{
+  const name=nameInput.value.trim()||'Captain';
+  const wilds=document.getElementById('wildsToggle').checked;
+  SFX.sail();
+  G.wilds=wilds;initRun(name,wilds);showScreen('board');
+});
+document.getElementById('btnQtyDown').addEventListener('click',()=>{SFX.tap();const el=document.getElementById('qtyDisplay');const v=parseInt(el.textContent);if(v>1)el.textContent=v-1;});
+document.getElementById('btnQtyUp').addEventListener('click',()=>{SFX.tap();const el=document.getElementById('qtyDisplay');el.textContent=parseInt(el.textContent)+1;});
 document.getElementById('btnBid').addEventListener('click',()=>{if(G.phase!=='bidding')return;if(!G.players[G.currentPlayerIdx]?.isHuman)return;humanBid();});
 document.getElementById('btnLiar').addEventListener('click',()=>{if(G.phase!=='bidding')return;if(!G.players[G.currentPlayerIdx]?.isHuman)return;humanChallenge();});
 </script>
