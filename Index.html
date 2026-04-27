@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Liar's Dice — The Tavern</title>
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0D0906; --surface:#1A1108; --surface2:#221608;
+  --border:#3D2810; --border2:#5C3D1A;
+  --cream:#F0E2C0; --muted:#7A6040;
+  --gold:#C8911A; --gold-l:#E8B84B;
+  --danger:#B02818; --danger-l:#E03020;
+  --success:#2A7A40; --warning:#C06010;
+  --theme-accent:#C8911A; --theme-bg-from:#2A1800; --theme-table-from:#1A1000;
+}
+.ante-1{--theme-accent:#C8911A;--theme-bg-from:#2A1800;--theme-table-from:#1A1000}
+.ante-2{--theme-accent:#4A7AB5;--theme-bg-from:#0A1528;--theme-table-from:#0A1020}
+.ante-3{--theme-accent:#2A8A50;--theme-bg-from:#081A10;--theme-table-from:#061410}
+.ante-4{--theme-accent:#8A9AB0;--theme-bg-from:#101418;--theme-table-from:#0C1014}
+.ante-5{--theme-accent:#C03020;--theme-bg-from:#140808;--theme-table-from:#0E0404}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{background:var(--bg);color:var(--cream);font-family:'IM Fell English',Georgia,serif;min-height:100dvh;overflow-x:hidden;position:relative;transition:background 0.8s}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:0.4}
+body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 60%,transparent 40%,rgba(0,0,0,0.7) 100%);pointer-events:none;z-index:1}
+#app{position:relative;z-index:2;max-width:430px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column}
+.screen{display:none;flex-direction:column;flex:1}
+.screen.active{display:flex}
+
+/* ═══ SETUP ═══ */
+#setup{align-items:center;justify-content:center;padding:28px 24px 48px;gap:22px;background:radial-gradient(ellipse at 50% 30%,var(--theme-bg-from) 0%,var(--bg) 70%)}
+.title-eyebrow{font-size:11px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;text-align:center}
+.title-main{font-family:'Pirata One',cursive;font-size:56px;color:var(--cream);line-height:1;text-shadow:0 0 40px rgba(200,145,26,0.35);text-align:center}
+.title-sub{font-style:italic;font-size:13px;color:var(--muted);margin-top:6px;text-align:center}
+.setup-field{width:100%}
+.setup-label{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;display:block}
+.setup-input{width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:12px 16px;font-family:'IM Fell English',serif;font-size:16px;color:var(--cream);outline:none}
+.setup-input:focus{border-color:var(--gold)}
+.setup-input::placeholder{color:var(--muted)}
+.toggle-row{width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+.toggle-title{font-size:14px;color:var(--cream)}
+.toggle-desc{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px}
+.toggle-switch{position:relative;width:48px;height:26px;cursor:pointer}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-track{position:absolute;inset:0;background:var(--border2);border-radius:13px;transition:background 0.2s}
+.toggle-track::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--cream);transition:transform 0.2s}
+.toggle-switch input:checked+.toggle-track{background:var(--gold)}
+.toggle-switch input:checked+.toggle-track::after{transform:translateX(22px)}
+.ante-row{width:100%;display:flex;gap:6px}
+.ante-pip{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 2px;text-align:center}
+.ante-num{font-family:'Pirata One',cursive;font-size:20px;color:var(--cream)}
+.ante-label{font-size:9px;color:var(--muted);letter-spacing:0.5px;margin-top:1px}
+.ante-opp{font-size:9px;color:var(--muted)}
+.btn-primary{width:100%;background:var(--gold);border:none;border-radius:10px;padding:16px;font-family:'Pirata One',cursive;font-size:20px;letter-spacing:4px;color:var(--bg);cursor:pointer;transition:background 0.15s,transform 0.1s;box-shadow:0 4px 20px rgba(200,145,26,0.3)}
+.btn-primary:active{transform:scale(0.97)}
+.btn-primary:disabled{opacity:0.35;cursor:not-allowed}
+
+/* ═══ BOARD — NEW LAYOUT ═══ */
+#board{background:var(--bg);display:flex;flex-direction:column}
+
+/* Run bar — compact */
+.run-bar{display:flex;align-items:center;gap:8px;padding:7px 14px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
+.run-ante{display:flex;align-items:baseline;gap:3px}
+.run-ante-label{font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+.run-ante-val{font-family:'Pirata One',cursive;font-size:20px;color:var(--cream)}
+.run-theme-name{font-size:12px;color:var(--theme-accent);font-style:italic;flex:1;text-align:center;transition:color 0.8s}
+.run-pips{display:flex;gap:4px}
+.run-pip{width:10px;height:10px;border-radius:50%;background:var(--border2);border:1px solid var(--border2);transition:background 0.3s}
+.run-pip.done{background:var(--gold);border-color:var(--gold)}
+.run-pip.active{background:var(--cream);border-color:var(--gold);box-shadow:0 0 5px var(--gold)}
+.modifier-tag{font-size:11px;color:var(--warning);background:rgba(192,96,16,0.15);border:1px solid rgba(192,96,16,0.3);border-radius:4px;padding:3px 7px;white-space:nowrap}
+
+/* ═══ OPPONENT STAGE — the hero zone ═══ */
+.opponent-stage{
+  flex-shrink:0;
+  background:radial-gradient(ellipse at 50% 40%,var(--theme-bg-from) 0%,var(--bg) 75%);
+  transition:background 0.8s;
+  position:relative;
+  overflow:hidden;
+< truncated lines 82-591 >
+  // Player dice
+  const dr=document.getElementById('playerDice');dr.innerHTML='';
+  for(let i=0;i<5;i++){const d=document.createElement('div');if(i<human.diceCount){d.className='die';d.textContent=FACES[human.dice[i]-1]||'⚀';d.style.animationDelay=`${i*0.07}s`;d.classList.add('rolling');setTimeout(()=>d.classList.remove('rolling'),600+i*70);}else{d.className='die ghost';d.textContent='·';}dr.appendChild(d);}
+
+  // Controls
+  const bb=document.getElementById('bidBuilder');const bm=document.getElementById('waitingMsg');
+  const btnBid=document.getElementById('btnBid');const btnLiar=document.getElementById('btnLiar');
+  if(isMyTurn){bb.style.display='';bm.style.display='none';btnBid.disabled=false;btnLiar.disabled=!G.currentBid;if(G.currentBid)btnLiar.classList.add('ready');else btnLiar.classList.remove('ready');if(!document.querySelector('.face-btn.selected'))initBidBuilder();}
+  else{bb.style.display='none';bm.style.display='';bm.textContent=`${cur?.name||'Opponent'} is thinking…`;btnBid.disabled=true;btnLiar.disabled=true;btnLiar.classList.remove('ready');}
+  showScreen('board');
+}
+
+function getState(p){
+  if(p.isEliminated)return'defeated';
+  const la=G.lastAction[p.charKey];
+  if(la==='winChallenge')return'triumphant';
+  if(la==='loseChallenge')return'angry';
+  if(p.diceCount<=1)return'nervous';
+  if(p.diceCount<=2&&p.personality==='hothead')return'angry';
+  if(p.personality==='shark')return'neutral';
+  return'neutral';
+}
+
+function initBidBuilder(){
+  const startQty=G.currentBid?G.currentBid.qty+1:1;
+  document.getElementById('qtyDisplay').textContent=startQty;
+  const fr=document.getElementById('faceRow');fr.innerHTML='';
+  const startFace=G.currentBid?G.currentBid.face:3;
+  FACES.forEach((f,i)=>{const btn=document.createElement('button');btn.className='face-btn'+(i+1===startFace?' selected':'');btn.textContent=f;btn.dataset.face=i+1;btn.onclick=()=>{document.querySelectorAll('.face-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');};fr.appendChild(btn);});
+}
+
+function renderReveal(){
+  const rev=G.pendingReveal;const ps=G.players;
+  const challenger=ps.find(p=>p.id===rev.challengerId);const bidder=ps.find(p=>p.id===rev.bidderId);const loser=ps.find(p=>p.id===rev.loserId);
+  if(loser&&!loser.isHuman&&loser.isEliminated)setTimeout(()=>{const el=document.querySelector(`[data-char="${loser.charKey}"]`);showTauntOn(loser.charKey,'eliminated',el);},1200);
+  let html=`<div class="outcome-banner ${rev.bidWasValid?'bidder-won':'challenger-won'}"><div class="outcome-title">${rev.bidWasValid?'BID WAS GOOD':'LIAR EXPOSED'}</div><div class="outcome-sub">${challenger?.name} called liar on ${bidder?.name}.<br>${rev.bidWasValid?`The bid held — ${loser?.name} loses a die.`:`The bluff failed — ${loser?.name} loses a die.`}</div></div><div class="reveal-section-label">Dice on the Table</div>`;
+  Object.entries(rev.allDice).forEach(([pid,dice],idx)=>{const p=ps.find(pl=>pl.id===pid);if(!p)return;const diceHtml=dice.map(d=>`<span class="reveal-die" data-face="${d}">${FACES[d-1]}</span>`).join('');html+=`<div class="player-reveal-row${pid===rev.loserId?' loser':''}" data-delay="${idx*120}"><div class="reveal-name">${pid===rev.loserId?'💀 ':''}${p.isHuman?'You':p.name}</div><div class="reveal-dice" data-pid="${pid}">${diceHtml}</div></div>`;});
+  html+=`<div class="count-card"><div class="count-label">Actual Count</div><div class="count-val">${rev.actual} × ${FACES[rev.bid.face-1]}</div><div class="count-bid">Bid was: ${rev.bid.qty} × ${FACES[rev.bid.face-1]}</div></div>`;
+  if(rev.matchOver)html+=`<div style="text-align:center;font-family:'Pirata One',cursive;font-size:24px;color:var(--cream);letter-spacing:2px;padding:6px 0">${rev.humanWon?`⚓ ${ANTE_THEMES[G.currentAnte].name} cleared!`:'💀 The plank awaits.'}</div>`;
+  const btnLabel=rev.matchOver?(rev.humanWon?'CLAIM BOON →':'SEE THE DAMAGE →'):'NEXT ROUND →';
+  html+=`<button class="btn-continue" id="btnContinue" style="opacity:0;pointer-events:none">${btnLabel}</button>`;
+  document.getElementById('revealInner').innerHTML=html;showScreen('reveal');
+  let totalDelay=0;document.querySelectorAll('[data-pid]').forEach((container,i)=>{const delay=i*200;const spans=container.querySelectorAll('.reveal-die');totalDelay=delay+spans.length*90+300;setTimeout(()=>{spans.forEach((span,j)=>{setTimeout(()=>{span.classList.add('shown');if(parseInt(span.dataset.face)===rev.bid.face)setTimeout(()=>span.classList.add('match'),120);},j*90);});},delay);});
+  setTimeout(()=>{const btn=document.getElementById('btnContinue');if(btn){btn.style.opacity='1';btn.style.pointerEvents='auto';btn.onclick=continueAfterReveal;}},totalDelay+200);
+}
+
+function renderBoon(offered){document.getElementById('boonSub').textContent=`${ANTE_THEMES[G.currentAnte-1]?.name||'Ante'} cleared. Choose your reward.`;const cards=document.getElementById('boonCards');cards.innerHTML='';offered.forEach(b=>{const div=document.createElement('div');div.className='boon-card';div.innerHTML=`<div class="boon-name">${b.name}</div><div class="boon-desc">${b.desc}</div>`;div.onclick=()=>pickBoon(b);cards.appendChild(div);});}
+
+function renderRunOver(won,score){
+  document.getElementById('runoverSkull').textContent=won?'⚓':'💀';
+  document.getElementById('runoverTitle').textContent=won?'VICTORY!':'RUN ENDED';
+  const antesCleared=G.anteHistory.filter(a=>a.won).length;
+  const lastAnte=G.anteHistory[G.anteHistory.length-1];
+  document.getElementById('runoverSub').textContent=won?`All five antes cleared, Captain ${G.humanName}.`:`${ANTE_THEMES[lastAnte?.ante||1]?.name} was your final table.`;
+  document.getElementById('finalScore').textContent=score;
+  const rev=G.pendingReveal;const loser=rev?G.players.find(p=>p.id===rev.loserId):null;const bidder=rev?G.players.find(p=>p.id===rev.bidderId):null;const challenger=rev?G.players.find(p=>p.id===rev.challengerId):null;
+  let momentText='';
+  if(rev){const calledBy=challenger?.isHuman?'You':challenger?.name;const calledOn=bidder?.isHuman?'you':bidder?.name;const result=rev.bidWasValid?`Bid held (${rev.actual} actual). ${loser?.isHuman?'You lost':'They lost'} a die.`:`Bluff exposed (only ${rev.actual}). ${loser?.isHuman?'You walked the plank.':'They walked the plank.'}`;momentText=`${calledBy} called liar on ${calledOn} (${rev.bid.qty}×${FACES[rev.bid.face-1]}). ${result}`;}
+  document.getElementById('shareCardSlot').innerHTML=`<div class="share-card"><div class="share-card-title">☠ Liar's Dice — Run Report ☠</div><div class="share-card-run">${won?'Victory Run':'Run Ended'} — ${antesCleared}/5 Antes</div><div class="share-card-detail">Captain ${G.humanName} · ${G.totalRounds} rounds · ${G.collectedBoons.length} boons${G.activeModifier?`<br>⚡ ${G.activeModifier.label}`:''}</div>${momentText?`<div class="share-card-moment"><div class="share-card-moment-text">${momentText}</div></div>`:''}<div class="share-card-score"><div class="share-card-score-label">Final Score</div><div class="share-card-score-val">${score}</div></div><div class="share-card-url">liars-dice.app</div></div><button class="btn-share" onclick="shareRun(${score},'${won?'Victory':'Defeated'}',${antesCleared})">SHARE THIS RUN →</button>`;
+  const rec=document.getElementById('anteRecord');rec.innerHTML='<div style="font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:6px">Voyage Log</div>';
+  G.anteHistory.forEach(a=>{const row=document.createElement('div');row.className='ante-record-row';row.innerHTML=`<div style="font-family:'Pirata One',cursive;font-size:16px;color:var(--muted);min-width:20px">${a.ante}</div><div style="font-size:16px">${a.won?'✅':'💀'}</div><div style="flex:1;font-size:12px;color:var(--muted)">${ANTE_THEMES[a.ante]?.name||''}</div><div style="font-size:11px;color:var(--muted)">${a.rounds} rounds</div>`;rec.appendChild(row);});
+}
+
+function shareRun(score,result,antes){const text=`☠️ Liar's Dice — ${result}!\n${G.humanName} cleared ${antes}/5 antes — Score: ${score}\nPlay at liars-dice.app`;if(navigator.share)navigator.share({title:"Liar's Dice",text}).catch(()=>copyToClipboard(text));else{copyToClipboard(text);showToast('Run copied to clipboard! 📋');}}
+function copyToClipboard(text){if(navigator.clipboard)navigator.clipboard.writeText(text).catch(()=>{});else{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);}}
+
+let toastT;
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2400);}
+function shuffleArr(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
+
+// ═══ INIT ═══
+const nameInput=document.getElementById('nameInput');const btnStart=document.getElementById('btnStart');
+nameInput.addEventListener('input',()=>{btnStart.disabled=nameInput.value.trim().length===0;});
+btnStart.addEventListener('click',()=>{const name=nameInput.value.trim()||'Captain';const wilds=document.getElementById('wildsToggle').checked;G.wilds=wilds;initRun(name,wilds);showScreen('board');});
+document.getElementById('btnQtyDown').addEventListener('click',()=>{const el=document.getElementById('qtyDisplay');const v=parseInt(el.textContent);if(v>1)el.textContent=v-1;});
+document.getElementById('btnQtyUp').addEventListener('click',()=>{const el=document.getElementById('qtyDisplay');el.textContent=parseInt(el.textContent)+1;});
+document.getElementById('btnBid').addEventListener('click',()=>{if(G.phase!=='bidding')return;if(!G.players[G.currentPlayerIdx]?.isHuman)return;humanBid();});
+document.getElementById('btnLiar').addEventListener('click',()=>{if(G.phase!=='bidding')return;if(!G.players[G.currentPlayerIdx]?.isHuman)return;humanChallenge();});
+</script>
+</body>
+</html>
